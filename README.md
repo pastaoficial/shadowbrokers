@@ -116,7 +116,7 @@ el comando "use" nos deja cargar los plugins, entonces le vamos a dedicar un cap
 
 vamos a cargar eternalblue para analizar como cargan los plugins:
 
-![](docs/img/26-eternalblue.png)
+![](docs/img/26-useEternalblue.png)
 
 "use" parcea el archivo xml del plugin para cargar los parametros que estan entre el tag <inputparameters>
 
