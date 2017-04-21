@@ -142,4 +142,96 @@ para analizar el ejecutable vamos a ponerle un while true en el entry point y pa
 
 esto nos va a permitir hacer un Attach al process y debuggearlo antes de que ejecute su codigo
 
+reiniciamos el fuzzbunch y cargamos el EternalBlue, va a quedar parado en:
+
+![](docs/img/30-launchLoop.png)
+
+nos attacheamos al proceso:
+
+![](docs/img/30-1-attach.png)
+
+esta no es el popen anterior que ya analizamos, para saber los argumentos que recibio el programa nos vamos al PEB
+
+![](docs/img/31-1-1-peb.png)
+
+y desde ahi a ProcessParameters
+
+![](docs/img/32-arguments.png)
+
+fue llamado con la opcion --ValidateOnly
+
+restoreamos los bytes originales del EntryPoint y lo corremos, terminando el proceso
+
+![](docs/img/35-terminatedPeroNoMuerto.png)
+
+ahora si nos disponemos a debuggear la parte del exploit mientras se ejecuta:
+
+![](docs/img/36-lastStep.png)
+
+attacheamos y restoreamos los bytes para tracear el ejecutable, pero lamentablemente cuando miremos fuzzbunch vamos a tener esta ventana:
+
+![](docs/img/37-timeteo.png)
+
+### Buscando el timeout
+
+Con un grep rapido a la string "Timeout" sale rapido la zona:
+
+![](docs/img/38-timeout2.png)
+
+por default esta seteado a 45:
+
+![](docs/img/40-cambiosegundos.png)
+
+le ponemos una cantidad de segundos que nos permita trabajar tranquilos, en mi caso 3600
+
+### Cayendo en zonas calientes del exploit
+
+el exploit printea un monton de strings mientras va ejecutando, esos prints provienen de TcLog, lo buscamos y ponemos un breakpoint ahi:
+
+![](docs/img/50-enTcLog.png)
+
+donde triggerea el breakpoint caemos en calls lindos como:
+
+![](docs/img/51-pinging.png)
+
+![](docs/img/52-active.png)
+
+el exploit revienta smb, asi que buscamos en las importadas para encontrar funciones de manejo de red
+
+![](docs/img/60-apislindas.png)
+
+muchos mensajes smb se pasan por los sockets, como:
+
+![](docs/img/70-paquete.png)
+
+### Pinging backdoor
+
+el pinging backdoor es un mensaje que envia el exploit a la maquina para ver si ya esta comprometida y con el agente instalado. Vamos a interceptar este mensaje:
+
+para hacer eso breakeamos en la cuarta llamada a recv y verificamos como lleno el buffer:
+
+![](docs/img/78-response.png)
+
+ponemos un hardware breakpoint on access para caer cuando trabaja con ese byte en particular y se nos dispara aqui:
+
+![](docs/img/80-larestat.png)
+
+el codigo anterior salio de una especie de switch, y chequea varias posibilidades
+
+como por ejemplo 0x51 que es que la maquina esta comprometida:
+
+![](docs/img/101.png)
+
+o 0x81 y 0x71 que son codigos de error:
+
+![](docs/img/90-con71.png)
+
+![](docs/img/100-con81.png)
+
+### tarea para la casa
+
+Con esta consulta SMB podemos saber facilmente si una maquina esta comprometida con el agente instalado, ahora tocara:
+
+* hacer un plugin de nmap que escanee
+* un disector de wireshark para el protocolo de comunicacion del cover channel
 
