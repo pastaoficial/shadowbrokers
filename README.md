@@ -1,5 +1,4 @@
 # shedding light on shadow brokers
-## because in the shadow the smoke can't seen
 
 ### Analizando fuzzbunch
 
