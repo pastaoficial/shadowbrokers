@@ -117,7 +117,7 @@ vamos a cargar eternalblue para analizar como cargan los plugins:
 
 ![](docs/img/26-useEternalblue.png)
 
-"use" parcea el archivo xml del plugin para cargar los parametros que estan entre el tag <inputparameters>
+"use" parcea el archivo xml del plugin para cargar los parametros que estan entre el tag \<inputparameters\>
 
 para solicitar un option del plugin se configura asi:
 
