@@ -232,6 +232,8 @@ y si es NULL, nos avisa que no tenemos el backdoor instalado y procede a explota
 ![](docs/img/102-negada.png)
 
 en la imagen se pueden ver dos paquetes nulleados del ping al backdoor, el primero desato la explotacion del bug y el segundo se uso para chequear si fue correctamente instalado
+
+como curiosidad podemos ver como en uno de los paquetes de respuesta viene la informacion pertinente acerca de nuestro sistema, util para cualquier fingreprint que estemos haciendo
  
 ### tarea para la casa
 
