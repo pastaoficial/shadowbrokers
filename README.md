@@ -227,6 +227,12 @@ o 0x81 y 0x71 que son codigos de error:
 
 ![](docs/img/100-con81.png)
 
+y si es NULL, nos avisa que no tenemos el backdoor instalado y procede a explotar, este debe ser el valor por defecto que envia windows
+
+![](docs/img/102-negada.png)
+
+en la imagen se pueden ver dos paquetes nulleados del ping al backdoor, el primero desato la explotacion del bug y el segundo se uso para chequear si fue correctamente instalado
+ 
 ### tarea para la casa
 
 Con esta consulta SMB podemos saber facilmente si una maquina esta comprometida con el agente instalado, ahora tocara:
