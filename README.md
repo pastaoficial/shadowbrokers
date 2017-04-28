@@ -56,15 +56,15 @@ El archivo original tiene un texto con un True o False booleano de python:
 
 ![](docs/img/7-1-original.png)
 
-como este texto es evaluado con eval(), podriamos lograr una ejecucion de comandos con:
+ese eval() ejecutara cualquier comando de python que le enviemos, en mi caso prepare una ejecucion de comandos para que haga una reverse shell y ownear al atacante
 
 ![](docs/img/7-test.png)
 
-dejando la variable enablecolor con el stdout del dir:
+y cuando el atacante lance fb.py nos dara conexion a nosotros:
 
 ![](docs/img/9-commandinjection.png)
 
-la ejecucion de comandos corrio satisfactoriamente, y ese comando va a correr con los privilegios del usuario que ejecuto fuzzbunch
+ahi tenemos nuestra reverse shell con los privilegios del usuario que ejecuto fuzzbunch, owneando al kaker
 
 ### Siguiendo en el constructor de Fuzzbunch
 
