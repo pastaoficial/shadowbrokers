@@ -56,7 +56,7 @@ El archivo original tiene un texto con un True o False booleano de python:
 
 ![](docs/img/7-1-original.png)
 
-ese eval() ejecutara cualquier comando de python que le enviemos, en mi caso prepare una ejecucion de comandos para que haga una reverse shell y ownear al atacante
+el anterior eval() de color ejecutara cualquier comando de python que le enviemos, en mi caso prepare un command execution para que haga una reverse shell y ownear al atacante
 
 ![](docs/img/7-test.png)
 
