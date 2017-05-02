@@ -234,6 +234,16 @@ y si es NULL, nos avisa que no tenemos el backdoor instalado y procede a explota
 en la imagen se pueden ver dos paquetes nulleados del ping al backdoor, el primero desato la explotacion del bug y el segundo se uso para chequear si fue correctamente instalado
 
 como curiosidad podemos ver como en uno de los paquetes de respuesta viene la informacion pertinente acerca de nuestro sistema, util para cualquier fingreprint que estemos haciendo
+
+### El exploit
+
+los mensajes ya spoilearon que es un use after free
+
+![](docs/img/201-uaf.png)
+
+la idea es parchear el ejecutable para que el pingeo retorne que no tiene el backdoor, para que lo triggeree siempre, asi lo vamos a poder analizar
+
+![](docs/img/200-parcheado.png)
  
 ### tarea para la casa
 
